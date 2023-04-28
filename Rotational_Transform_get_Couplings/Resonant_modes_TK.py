@@ -21,9 +21,8 @@ def read_data_iota(file):
 
 #Obtain all coupling in the iota boundaries
 def resonance_coupling(dataframe):
-    #iota_min = min(abs(dataframe["       iota"]))
+    iota_min = min(abs(dataframe["       iota"]))
     iota_max = max(abs(dataframe["       iota"]))
-    iota_min = 1.2
     
     n_families = np.linspace(1,17,17)
     
