@@ -113,7 +113,7 @@ def plot_resonant_modes(coupl,period,folder,pos,dataframe,s):
         res_modes = new_res_df[new_res_df["n"].isin(n_fam[i])]
         lab = res_modes["n"].values
         lab = np.unique(lab)
-        ax1.plot(res_modes["n"],res_modes["n/m"],"o",label=f"n={lab}" if len(res_modes["n"]) != 0 else None)
+        ax1.plot(res_modes["n"],res_modes["n/m"],"o")
         ax2.plot(res_modes["n"],res_modes["m"],"o",label=f"n={lab}" if len(res_modes["n"]) != 0 else None)
     
     #Axis 1:Figure i vs n
@@ -123,7 +123,6 @@ def plot_resonant_modes(coupl,period,folder,pos,dataframe,s):
     ax1.set_xticks(x)
     ax1.tick_params(axis='both',labelsize=14)
     ax1.set_xlim([min(new_res_df["n"])-1,max(new_res_df["n"])+1])
-    ax1.legend(loc=pos,prop={'size':s}) 
     ax1.grid(True)
     
     
