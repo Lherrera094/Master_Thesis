@@ -47,23 +47,18 @@ def resonance_coupling(dataframe):
     
     #This next line takes into account if more values of m makes n/m be inside iota profile
     for i in range(len(new_array)):
-        
         if new_array_1["marker"][i] > 1:
             
-            #print(new_array_1["marker"][i]-1,new_array_1["n"][i])
-            
+            #Add new n/m values to the dataframe
             for l in range(int(new_array_1["marker"][i])-1):
-                
                 row_to_copy = new_array_1.loc[i]
                 new_row = row_to_copy.copy()
                 new_row["m"],new_row["n/m"] = new_row["m"] + (l+1),new_row["n"]/(new_row["m"] + (l+1))
-                
                 new_array_1 = new_array_1.append(new_row, ignore_index=True)
     
     clean_indx = new_array_1[new_array_1.marker.isin([0.0])].index
     new_array_1.loc[clean_indx, "m"] = 0.0
     new_array_1.loc[clean_indx, "n/m marked"] = np.nan
-    
     new_array_1 = new_array_1.sort_values('n',ascending=True)
     
     return iota_max, iota_min, new_array_1
