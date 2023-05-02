@@ -128,6 +128,9 @@ def get_main_data(f):
             n, grwth1, omega1 = ndata[tline].split()
             toroidal_couplings.append(n)
             
+        if(grwth1 > grwth):
+            grwth = grwth1
+            
     except Exception as e:
         x = 0
     
