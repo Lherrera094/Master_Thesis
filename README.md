@@ -10,7 +10,7 @@ Series of codes created to optimize the analysis of the [FAR3d](https://e-archiv
 
 <p align="center">
   
-![Couplings]("In Continuum Analysis"/"Examples"/1.5_iota_Couplings.png)
+![Couplings](In Continuum Analysis/Examples/1.5_iota_Couplings.png)
   
 </p>
 
