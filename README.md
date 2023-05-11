@@ -9,5 +9,5 @@ FAR3d Results Visualization: Reads the outputs of the FAR3d simulations, plots a
 
 In Continuum Analysis: Reads the excel file "Output_{Prof}_{n_fam}" and plot in the Alfvén Continuum at the radial position, the excited eigenmodes and                            their growth rate represented as a colormap. The software . Also creates and excel "{Profile}_Maximum_Values" separeted by NBI                              profile, with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
 
-Frequency and GrowthRate Heatmaps: From the Output of the FAR3d simulations, creates a series of heatmaps of Frequency and Growth Rate with configuration                                      (EP_beta,EP_Energy).
+Heatmaps: From the Output of FAR3d simulations, creates a series of heatmaps of Frequency and Growth Rate with configuration                                      (EP_beta,EP_Energy) to show the change of Alfvén Eigenmodes.
 
