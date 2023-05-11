@@ -28,7 +28,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
 </p>
 
 * **Heatmaps**: From the Output of FAR3d simulations, creates a series of heatmaps of Frequency and Growth Rate with configuration                                      (EP_beta,EP_Energy) to show the change of Alfvén Eigenmodes.
-* 
+ 
 <p align="center">
   
 ![Couplings](/Heatmaps/Heatmaps_(n=3_7_11_15)_git.png)
