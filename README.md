@@ -26,7 +26,7 @@ Series of codes created to optimize the analysis of the [FAR3d](https://e-archiv
 
 <p align="center">
   
-![Couplings](/In%20Continuum%20Analysis/Frequency_Experimental Profile_Analysis.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
+![Couplings](/In%20Continuum%20Analysis/Frequency_Experimental%20Profile_Analysis.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
   
 </p>
 
