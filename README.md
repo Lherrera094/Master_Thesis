@@ -2,11 +2,15 @@
 
 Supervisor: [Jacobo Varela](https://www.researchgate.net/profile/Jacobo-Varela)
 
-Series of codes created to optimize the analysis of the [FAR3d](http://fusionsites.ciemat.es/jlvelasco/files/papers/cappa2021alfven.pdf) outputs.
+Series of codes created to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.es/bitstream/handle/10016/34630/Noninear_NF_2021.pdf?sequence=1) outputs.
 
-* **Automatization Folder**: Contains the scripts to create the folders with the Input characteristics the user wish to study and launch FAR3d simulations in a                          much faster way. It was develop to use it in the cluster URANUS in Universidad Carlos III de Madrid.
+* **Automatization**: Contains the scripts to create the folders with the Input characteristics the user wish to study and launch FAR3d simulations in a much faster way. It was develop to be use in the cluster URANUS at Universidad Carlos III de Madrid.
 
-* **Rotational Transform Couplings**: It gives the toroidal couplings with their respective poloidal couplings, and rotational transform profile. The outputs for couplings are                                       represented in two graphs and an excel with all relevant values. As inputs, it receives the profile.dat file from FAR3d and                                 the periods for the device.
+* **Rotational Transform Couplings**: It gives the toroidal couplings with their respective poloidal couplings, and rotational transform profile. The outputs for couplings are represented in two graphs and an excel with all relevant values. As inputs, it receives the profile.dat file from FAR3d and the periods for the device.
+
+<p align="center">
+![Couplings](1.5_iota_Couplings.png)
+</p>
 
 * **FAR3d Results Visualization**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individualy and creates an image with the whole set of                                plots in arranged as (EP_beta,EP_energy). Returns an excel file with important data from the simulations usefull for analysis                              called `Output_{Prof}_{n_fam}`.
 
