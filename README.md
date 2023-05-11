@@ -10,11 +10,11 @@ Series of codes created to optimize the analysis of the [FAR3d](https://e-archiv
 
 <p align="center">
   
-![Couplings](/Rotational%20Transform%20Couplings/Examples/1.5_iota_Couplings.png "New Image")
+![Couplings](/Rotational%20Transform%20Couplings/Examples/1.5_iota_Couplings.png "Example for a 4 period stellarator with high shear.")
   
 </p>
 
-* **FAR3d Results Visualization**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individualy and creates an image with the whole set of                                plots in arranged as (EP_beta,EP_energy). Returns an excel file with important data from the simulations usefull for analysis                              called `Output_{Prof}_{n_fam}`.
+* **FAR3d Results Visualization**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individually and creates a map image with the whole set of plots arranged as (EP_beta,EP_energy). Returns an excel file with important data from the simulations usefull for further analysis called `Output_{Prof}_{n_fam}`.
 
 <p align="center">
   
@@ -22,7 +22,18 @@ Series of codes created to optimize the analysis of the [FAR3d](https://e-archiv
   
 </p>
 
-* **Continuum Analysis**: Reads the excel file `Output_{Prof}_{n_fam}` and plot in the Alfvén Continuum at the radial position, the excited eigenmodes and                            their growth rate represented as a colormap. The software . Also creates and excel `{Profile}_Maximum_Values` separeted by NBI                              profile, with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
+* **In Continuum Analysis**: Reads the excel file `Output_{Prof}_{n_fam}` and plot in the Alfvén Continuum at the radial position, the excited eigenmodes and their growth rate represented as a colormap. The software also creates and excel `{Profile}_Maximum_Values` separeted by fast particles profile, with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
+
+<p align="center">
+  
+![Couplings](/In%20Continuum%20Analysis/Frequency_Experimental%20Profile_Analysis.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
+  
+</p>
 
 * **Heatmaps**: From the Output of FAR3d simulations, creates a series of heatmaps of Frequency and Growth Rate with configuration                                      (EP_beta,EP_Energy) to show the change of Alfvén Eigenmodes.
-
+* 
+<p align="center">
+  
+![Couplings](/Heatmaps/Heatmaps_(n=3_7_11_15)_git.png)
+  
+</p>
