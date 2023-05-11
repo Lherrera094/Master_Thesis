@@ -22,6 +22,14 @@ Series of codes created to optimize the analysis of the [FAR3d](https://e-archiv
   
 </p>
 
+* **Heatmaps**: From the Output of FAR3d simulations, creates a series of heatmaps of Frequency and Growth Rate with configuration                                      (EP_beta,EP_Energy) to show the change of Alfvén Eigenmodes.
+* 
+<p align="center">
+  
+![Couplings](/Heatmaps/Heatmaps_(n=3_7_11_15)_git.png)
+  
+</p>
+
 * **In Continuum Analysis**: Reads the excel file `Output_{Prof}_{n_fam}` and plot in the Alfvén Continuum at the radial position, the excited eigenmodes and their growth rate represented as a colormap. The software also creates and excel `{Profile}_Maximum_Values` separeted by fast particles profile, with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
 
 <p align="center">
@@ -30,10 +38,3 @@ Series of codes created to optimize the analysis of the [FAR3d](https://e-archiv
   
 </p>
 
-* **Heatmaps**: From the Output of FAR3d simulations, creates a series of heatmaps of Frequency and Growth Rate with configuration                                      (EP_beta,EP_Energy) to show the change of Alfvén Eigenmodes.
-* 
-<p align="center">
-  
-![Couplings](/Heatmaps/Heatmaps_(n=3_7_11_15)_git.png)
-  
-</p>
