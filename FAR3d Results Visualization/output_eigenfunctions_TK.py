@@ -119,21 +119,30 @@ def get_main_data(f):
     
     tline = [idx for idx,line in enumerate(ndata) if 'n       Avg. gam:         Avg. om_r:' in line][0] + 1
     n, grwth, omega = ndata[tline].split()
-    grwth, omega = float(grwth), float(omega)
     toroidal_couplings.append(n)
-    
+
+    if grwth == "NaN":
+        grwth, omega = 0,-1000
+    else: 
+        grwth, omega = float(grwth), float(omega)
     try:
         for i in range(1,10):
             tline = [idx for idx,line in enumerate(ndata) if 'n       Avg. gam:         Avg. om_r:' in line][0] + 1 + (line_diference*i)
             n, grwth1, omega1 = ndata[tline].split()
             toroidal_couplings.append(n)
-            
-        if(grwth1 > grwth):
-            grwth = grwth1
-            
+        
+            if grwth1 == "NaN" or grwth1 == "nan":
+                grwth1, omega1 = 0,-1000
+            else:
+                grwth1, omega1 = float(grwth1), float(omega1)
+                
+            if grwth1 >= grwth:
+                grwth = grwth1
+                omega = omega1
+
     except Exception as e:
         x = 0
-    
+
     return grwth, omega, toroidal_couplings
 
 
@@ -148,17 +157,17 @@ def get_values(data_frame):
     dominant_mode = s_max[s_max.isin([max(df_desc.loc["max"])])].index[0] 
     radial_pos = np.argmax(data[dominant_mode].values)
     sol = dominant_mode[0]
-    
+
     #Width of the maximum mode
     max_df = data_frame[dominant_mode]
-    y1,x1,y2,x2 = dominant_mode_width(max_df)
+    y1,x1,y2,x2,width = dominant_mode_width(max_df)
     
     #Delete dominant mode from data_frame
     data = data.drop(dominant_mode,axis=1)
     for col in data.columns:
         if sol not in col:
             data = data.drop(col,axis=1)
-        
+       
     #treshold = 1
     #while(treshold <= 0.08):
     df_desc_sec = data.describe()
@@ -170,20 +179,31 @@ def get_values(data_frame):
     
     n1 = dominant_mode.split("/")
     n2 = dominant_mode_2.split("/")
-    m1 = n1[0].split("-") 
-    m2 = n2[0].split("-") 
+    
+    try:
+        m1 = n1[0].split("-") 
+        m2 = n2[0].split("-")
+        m_1,m_2 = int(m1[-1]),int(m2[-1])
+
+    except Exception as e: 
+        m1 = n1[0].split(" ") 
+        m2 = n2[0].split(" ")
+        m_1,m_2 = int(m1[-1]),int(m2[-1])
 
     n_1,n_2 = int(n1[1]),int(n2[1])
-    m_1,m_2 = int(m1[1]),int(m2[1])
     
-    if(n_1 == n_2):
-        df_desc_3 = data.describe()
-        s_max = df_desc_3.loc["max"]
-        dominant_mode_3 = s_max[s_max.isin([ max(df_desc_3.loc["max"])])].index[0]
-        radial_pos_3 = np.argmax(data[dominant_mode_3].values)
-        treshold = abs(radial_pos - radial_pos_3)/1000
-        data = data.drop(dominant_mode_3,axis=1)
-    else:
+    try:
+        if(n_1 == n_2):
+            df_desc_3 = data.describe()
+            s_max = df_desc_3.loc["max"]
+            dominant_mode_3 = s_max[s_max.isin([ max(df_desc_3.loc["max"])])].index[0]
+            radial_pos_3 = np.argmax(data[dominant_mode_3].values)
+            treshold = abs(radial_pos - radial_pos_3)/1000
+            data = data.drop(dominant_mode_3,axis=1)
+        else:
+            dominant_mode_3 = "--"
+            radial_pos_3 = "--"
+    except Exception as e:
         dominant_mode_3 = "--"
         radial_pos_3 = "--"
     
@@ -193,42 +213,53 @@ def get_values(data_frame):
         if(m_1 + 1 == m_2 or m_1 - 1 == m_2):
             alfmode = "TAE/EAE"
     
-    return dominant_mode, radial_pos, dominant_mode_2, radial_pos_2,dominant_mode_3, radial_pos_3, alfmode,x1,x2
-
+    return dominant_mode, radial_pos, dominant_mode_2, radial_pos_2,dominant_mode_3, radial_pos_3, alfmode, x1, x2, width
 
 def get_colors_dict(n):
     n = int(n)
     
     d =  {
+	1: {
+            'colfam': "mediumpurple",
+            'colors': ["indigo","darkviolet","mediumpurple","magenta","violet"] 
+        },
+	2: {
+            'colfam': 'darkturquoise',
+            'colors': ['darkcyan', 'cyan', 'darkturquoise','mediumturquoise','turquoise']             
+        },
         3: {
             'colfam': 'k',
-            'colors': ['black', 'dimgrey', 'grey']             
+            'colors': ['black', 'dimgrey', 'grey','silver','lightgrey']             
+        },
+	4: {
+            'colfam': "orange",
+            'colors': ["goldenrod","darkorange","orange","gold","yellow"] 
         },
         
         5: {
             'colfam': 'blue',
-            'colors': ['navy', 'blue', 'dodgerblue']
+            'colors': ['navy', "steelblue",'blue', 'dodgerblue','lightskyblue']
         },
         6: {
             'colfam': 'darkturquoise',
-            'colors': ['darkcyan', 'cyan', 'darkturquoise']
+            'colors': ['darkcyan', 'cyan', 'darkturquoise','mediumturquoise','turquoise']
         },
         
         7: {
             'colfam': 'limegreen',
-            'colors': ['darkgreen', 'forestgreen', 'limegreen', 'lime']
+            'colors': ['darkgreen', 'forestgreen', 'limegreen', 'lime','green']
         },
         8: {
             'colfam': 'red',
-            'colors': ['firebrick', 'crimson', 'red', 'tomato']
+            'colors': ['firebrick', 'crimson', 'red', 'tomato','salmon']
         },
         9: {
             'colfam': "green",
-            'colors': ["darkgreen","forestgreen","seagreen","green"] 
+            'colors': ["darkgreen","forestgreen","seagreen","green","limegreen"] 
         },
         10: {
             'colfam': "red",
-            'colors': ["firebrick","crimson","red","tomato"] 
+            'colors': ["firebrick","crimson","red","tomato",'salmon'] 
         },
         11: {
             'colfam': "mediumpurple",
@@ -236,7 +267,7 @@ def get_colors_dict(n):
         },
         12: {
             'colfam': 'k',
-            'colors': ['black', 'dimgrey', 'grey']  
+            'colors': ['black', 'dimgrey', 'grey','silver','lightgrey']  
         },
         13: {
             'colfam': "mediumpurple",
@@ -252,7 +283,7 @@ def get_colors_dict(n):
         },
         16: {
             'colfam': 'blue',
-            'colors': ['navy', 'blue', 'dodgerblue']
+            'colors': ['navy', "steelblue",'blue', 'dodgerblue','lightskyblue']
         },
         17: {
             'colfam': "orange",
@@ -261,7 +292,6 @@ def get_colors_dict(n):
     }
     
     return d[n]
-
 
 def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,tor_coupl):
     im = plt.figure(figsize=(9,8))
