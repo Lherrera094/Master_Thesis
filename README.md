@@ -11,7 +11,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
 
 * **Automatization**: Contains the scripts to create the folders with the Input characteristics the user wish to study and launch FAR3d simulations in a much faster way. It was develop to be use in the cluster URANUS at Universidad Carlos III de Madrid.
 
-* **Rotational Transform Couplings**: It gives the toroidal couplings with their respective poloidal couplings, and rotational transform profile. The outputs for couplings are represented in two graphs and an excel with all relevant values. As inputs, it receives the profile.dat file from FAR3d and the periods for the device.
+* **Rotational Transform Couplings**: It gives the helical couplings between the resonant modes and rotational transform profile. The outputs for couplings are represented in two graphs and an excel with all relevant values and as their values in the $\iota$ profile. As inputs, it receives the profile.dat file from FAR3d, the periods for the device and the equilibrium modes.
 
 <p align="center">
   
