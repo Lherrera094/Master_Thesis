@@ -15,7 +15,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
 
 <p align="center">
   
-![Couplings](/Rotational%20Transform%20Couplings/Examples/1.5_iota_Couplings.png "Example for a 4 period stellarator with high shear.")
+![Couplings](/Rotational%20Transform%20Couplings/Examples/delta_iota_-0.25_Resonant.png "Example for a 4 period stellarator with high shear.")
   
 </p>
 
