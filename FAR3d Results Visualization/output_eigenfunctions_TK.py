@@ -27,7 +27,7 @@ def create_files():
         os.makedirs(saving_file)
 
     results = pd.DataFrame(columns=['beta', 'efast', 'dominant_mode', 'radial_pos_maximum','width_i','width_f',
-                                    'coupling','radial_pos_2','Possible_EAE',
+                                    'width','coupling','radial_pos_2','Possible_EAE',
                                     'radial_pos_3','Alfvén_mode','Growth Rate',
                                     'Frequency','f(kHz)'])
     
@@ -40,7 +40,7 @@ def create_files():
 def sort_key(item):
     parts = item.split('.png')
     first, last = parts[0].split('_')
-    return -float(last), float(first)
+    return float(first), -float(last)
 
 
 #Remove not used files for each folder
@@ -215,6 +215,7 @@ def get_values(data_frame):
     
     return dominant_mode, radial_pos, dominant_mode_2, radial_pos_2,dominant_mode_3, radial_pos_3, alfmode, x1, x2, width
 
+
 def get_colors_dict(n):
     n = int(n)
     
@@ -293,6 +294,7 @@ def get_colors_dict(n):
     
     return d[n]
 
+
 def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,tor_coupl):
     im = plt.figure(figsize=(9,8))
     i,j,k=0,0,0
@@ -301,7 +303,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
     plt.annotate(f"Dominant Mode: {dm}", xy=(0.01, 0.335), xycoords='axes fraction', fontsize = 15)    
     plt.annotate(f"Coupled: {dm2}", xy=(0.01, 0.305), xycoords='axes fraction', fontsize = 15)             
     plt.annotate(f"Alfvén Mode: {alfm}", xy=(0.01, 0.275), xycoords='axes fraction', fontsize = 15)
-                         
+    
     #Marking lines and annotations    
     if 6 in tor_coupl:
         plt.axvline(rp/1000,color="blue",linewidth=1)
@@ -312,7 +314,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
     if rp3 != "--":
         plt.axvline(rp3/1000,color="k",linestyle="--",linewidth=1)
         plt.annotate(f"2nd Coupled: {dm3}", xy=(0.01, 0.245), xycoords='axes fraction', fontsize = 15)                 
-
+    
     for n in tor_coupl:
         d = get_colors_dict(n)
         plt.axhline(0,xmin = 0.05, xmax = 0.06,color=d["colfam"],linewidth=2,label=f"n= {n}")                   
@@ -324,7 +326,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
     for m in tor_coupl:
         i,j=0,0
         d = get_colors_dict(m)
-    
+       
         for col in df.columns:
             if f"/ {m}" in col or f"/{m}" in col:
                 if "I" in col:
@@ -333,13 +335,13 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
                 if "R" in col:
                     plt.plot(r,df[col],color=d['colors'][j],linewidth=1.5)
                     j += 1
-        
+       
     plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz",fontsize=22)               
     plt.xlabel("r/a",fontsize=20)
     plt.ylabel(r"$\Phi$",fontsize=20)
     plt.grid(True)
     plt.legend(loc="lower left")
-    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=400)
+    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=200)
 
 
 #Creates an array of sorted plots for panoramic visualization
@@ -347,10 +349,9 @@ def eigenfunction_maps(directory):
     images = []
     
     #Arrange list in descending order for energy and ascending for beta
-    act_dir = os.listdir(directory) #makes a list of the images names 
-    act_dir = sorted(act_dir)
+    act_dir = sorted(os.listdir(directory)) #makes a list of the images names 
     act_dir = sorted(act_dir, key=sort_key,reverse=True)
-    
+         
     #Gets the number of energy plots for the array of images
     my_list = [f.split("_")[0] for f in act_dir]
     unique_elements = sorted(set(my_list),reverse=True)
@@ -410,5 +411,7 @@ def dominant_mode_width(max_dataframe):
     
     x2 = max_mode["Radius"].iloc[-1]
     y2 = max_mode[name_column[0]].iloc[-1]
+
+    width = x2-x1
     
-    return y1,x1,y2,x2
+    return y1,x1,y2,x2,width
