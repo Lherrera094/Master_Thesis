@@ -302,7 +302,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
     #Information about the dominant modes
     plt.annotate(f"Dominant Mode: {dm}", xy=(0.01, 0.335), xycoords='axes fraction', fontsize = 15)    
     plt.annotate(f"Coupled: {dm2}", xy=(0.01, 0.305), xycoords='axes fraction', fontsize = 15)             
-    plt.annotate(f"Alfvén Mode: {alfm}", xy=(0.01, 0.275), xycoords='axes fraction', fontsize = 15)
+    #plt.annotate(f"Alfvén Mode: {alfm}", xy=(0.01, 0.275), xycoords='axes fraction', fontsize = 15)
     
     #Marking lines and annotations    
     if 6 in tor_coupl:
@@ -313,7 +313,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
             
     if rp3 != "--":
         plt.axvline(rp3/1000,color="k",linestyle="--",linewidth=1)
-        plt.annotate(f"2nd Coupled: {dm3}", xy=(0.01, 0.245), xycoords='axes fraction', fontsize = 15)                 
+        plt.annotate(f"2nd Coupled: {dm3}", xy=(0.01, 0.275), xycoords='axes fraction', fontsize = 15)                 
     
     for n in tor_coupl:
         d = get_colors_dict(n)
@@ -338,10 +338,10 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
        
     plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz",fontsize=22)               
     plt.xlabel("r/a",fontsize=20)
-    plt.ylabel(r"$\Phi$",fontsize=20)
+    plt.ylabel(r"$\delta \Phi$",fontsize=20)
     plt.grid(True)
     plt.legend(loc="lower left")
-    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=200)
+    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=500)
 
 
 #Creates an array of sorted plots for panoramic visualization
