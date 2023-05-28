@@ -42,6 +42,17 @@ def sort_key(item):
     first, last = parts[0].split('_')
     return float(first), -float(last)
 
+def check_convergence(list_modes):
+    val_0 = list_modes[0]
+    chek = True
+
+    #Compare items in list
+    for val in list_modes:
+        if val_0 != val:
+            chek = False
+            break
+
+    return chek
 
 #Remove not used files for each folder
 def remove_files(direct):
@@ -110,13 +121,14 @@ def plasma_parameters(directory,profiles,frec):
     return f, energy, beta, kev
 
 
-#From farprt obtains frequency and growth rate
+#From farprt obtains frequency and growth rate, checks convergence of the simulation
 def get_main_data(f):
     data = open(f+'/farprt')
     ndata = data.readlines()
     line_diference = 4
     toroidal_couplings = []
-    
+    gamma = []
+
     tline = [idx for idx,line in enumerate(ndata) if 'n       Avg. gam:         Avg. om_r:' in line][0] + 1
     n, grwth, omega = ndata[tline].split()
     toroidal_couplings.append(n)
@@ -125,6 +137,9 @@ def get_main_data(f):
         grwth, omega = 0,-1000
     else: 
         grwth, omega = float(grwth), float(omega)
+
+    gamma.append(grwth)
+    
     try:
         for i in range(1,10):
             tline = [idx for idx,line in enumerate(ndata) if 'n       Avg. gam:         Avg. om_r:' in line][0] + 1 + (line_diference*i)
@@ -135,6 +150,8 @@ def get_main_data(f):
                 grwth1, omega1 = 0,-1000
             else:
                 grwth1, omega1 = float(grwth1), float(omega1)
+
+            gamma.append(grwth1)
                 
             if grwth1 >= grwth:
                 grwth = grwth1
@@ -142,6 +159,13 @@ def get_main_data(f):
 
     except Exception as e:
         x = 0
+
+    chek = check_convergence(gamma)      
+
+    if chek:
+        print("Acceptable Convergence")
+    else:
+        print("Non-convergence Simulation")
 
     return grwth, omega, toroidal_couplings
 
@@ -341,7 +365,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
     plt.ylabel(r"$\delta \Phi$",fontsize=20)
     plt.grid(True)
     plt.legend(loc="lower left")
-    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=500)
+    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=300)
 
 
 #Creates an array of sorted plots for panoramic visualization
