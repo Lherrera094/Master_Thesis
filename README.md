@@ -31,7 +31,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
  
 <p align="center">
   
-![Couplings](/Heatmaps/Heatmaps_(n=3_7_11_15)_git.png)
+![Couplings](/Heatmaps/Heatmaps_(n=3_7_11_15).png)
   
 </p>
 
