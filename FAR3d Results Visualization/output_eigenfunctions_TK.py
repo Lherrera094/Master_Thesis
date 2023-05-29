@@ -246,74 +246,74 @@ def get_colors_dict(n):
     
     d =  {
 	1: {
-            'colfam': "mediumpurple",
-            'colors': ["indigo","violet"] 
+            'colfam': "black",
+            'colors': ['black','silver'] 
         },
 	2: {
-            'colfam': 'darkturquoise',
-            'colors': ['darkcyan','paleturquoise']             
+            'colfam': 'navy',
+            'colors': ["navy","royalblue"]             
         },
-        3: {
-            'colfam': 'k',
-            'colors': ['black','silver']             
+    3: {
+            'colfam': 'forestgreen',
+            'colors': ["forestgreen","lawngreen"]             
         },
 	4: {
-            'colfam': "goldenrod",
-            'colors': ["darkgoldenrod","yellow"] 
+            'colfam': "brown",
+            'colors': ["saddlebrown","sandybrown"] 
         },
         
-        5: {
+    5: {
             'colfam': 'blue',
             'colors': ['navy','lightskyblue']
         },
-        6: {
+    6: {
             'colfam': 'darkturquoise',
-            'colors': ['darkcyan','paleturquoise']
+            'colors': ['darkcyan','cyan']
         },
         
-        7: {
+    7: {
             'colfam': 'limegreen',
             'colors': ['darkgreen','lime']
         },
-        8: {
+    8: {
             'colfam': 'red',
             'colors': ['darkred','salmon']
         },
-        9: {
+    9: {
             'colfam': "green",
-            'colors': ["darkgreen","lime"] 
+            'colors': ["darkred","red"] 
         },
-        10: {
-            'colfam': "red",
-            'colors': ["darkred",'salmon'] 
+    10: {
+            'colfam': "orange",
+            'colors': ["darkgoldenrod","yellow"] 
         },
-        11: {
-            'colfam': "mediumpurple",
-            'colors': ["indigo","violet"] 
+    11: {
+            'colfam': "darkmagenta",
+            'colors': ["darkmagenta","magenta"] 
         },
-        12: {
-            'colfam': "mediumpurple",
-            'colors': ["indigo","magenta","violet"]
+    12: {
+            'colfam': "olive",
+            'colors': ["olive","darkkhaki"]
         },
-        13: {
+    13: {
             'colfam': 'k',
-            'colors': ['black','lightgrey']
+            'colors': ["black","silver"]
         },
-        14: {
-            'colfam': "forestgreen",
-            'colors': ["darkgreen","limegreen"] 
+    14: {
+            'colfam': "springgreen",
+            'colors': ["green","springgreen"] 
         },
-        15: {
+    15: {
             'colfam': "orange",
             'colors': ["darkgoldenrod","yellow"] 
         },
-        16: {
-            'colfam': 'navy',
-            'colors': ['navy', 'royalblue']
+    16: {
+            'colfam': 'mediumvioletred',
+            'colors': ["mediumvioletred","palevioletred"]
         },
-        17: {
-            'colfam': "orange",
-            'colors': ["darkgoldenrod","yellow"] 
+    17: {
+            'colfam': "darkslategrey",
+            'colors': ["darkslategrey","darkturquoise"] 
         },
     }
     
@@ -361,9 +361,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
                     i += 1
                 if "R" in col:
                     plt.plot(r,df[col],color=cmap(i/pol_num),linewidth=1.5)
-                    j += 1
-    
-    print(tor_coupl) 
+                    j += 1 
     
     plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz",fontsize=22)               
     plt.xlabel("r/a",fontsize=20)

@@ -12,7 +12,7 @@ sys.path.append('FAR3_libraries/')
 from output_eigenfunctions_TK import *
 
 
-#Puts the name in the file
+#Name the Output file as needed 
 profile_name = "Exp"
 l = 0
 
