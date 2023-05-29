@@ -15,6 +15,7 @@ from IPython.display import clear_output
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 from PIL import Image
+import matplotlib.colors as mc
 import os
 
 
@@ -246,73 +247,73 @@ def get_colors_dict(n):
     d =  {
 	1: {
             'colfam': "mediumpurple",
-            'colors': ["indigo","darkviolet","mediumpurple","magenta","violet"] 
+            'colors': ["indigo","violet"] 
         },
 	2: {
             'colfam': 'darkturquoise',
-            'colors': ['darkcyan', 'cyan', 'darkturquoise','mediumturquoise','turquoise']             
+            'colors': ['darkcyan','paleturquoise']             
         },
         3: {
             'colfam': 'k',
-            'colors': ['black', 'dimgrey', 'grey','silver','lightgrey']             
+            'colors': ['black','silver']             
         },
 	4: {
-            'colfam': "orange",
-            'colors': ["goldenrod","darkorange","orange","gold","yellow"] 
+            'colfam': "goldenrod",
+            'colors': ["darkgoldenrod","yellow"] 
         },
         
         5: {
             'colfam': 'blue',
-            'colors': ['navy', "steelblue",'blue', 'dodgerblue','lightskyblue']
+            'colors': ['navy','lightskyblue']
         },
         6: {
             'colfam': 'darkturquoise',
-            'colors': ['darkcyan', 'cyan', 'darkturquoise','mediumturquoise','turquoise']
+            'colors': ['darkcyan','paleturquoise']
         },
         
         7: {
             'colfam': 'limegreen',
-            'colors': ['darkgreen', 'forestgreen', 'limegreen', 'lime','green']
+            'colors': ['darkgreen','lime']
         },
         8: {
             'colfam': 'red',
-            'colors': ['firebrick', 'crimson', 'red', 'tomato','salmon']
+            'colors': ['darkred','salmon']
         },
         9: {
             'colfam': "green",
-            'colors': ["darkgreen","forestgreen","seagreen","green","limegreen"] 
+            'colors': ["darkgreen","lime"] 
         },
         10: {
             'colfam': "red",
-            'colors': ["firebrick","crimson","red","tomato",'salmon'] 
+            'colors': ["darkred",'salmon'] 
         },
         11: {
             'colfam': "mediumpurple",
-            'colors': ["indigo","darkviolet","mediumpurple","magenta","violet"] 
+            'colors': ["indigo","violet"] 
         },
         12: {
-            'colfam': 'k',
-            'colors': ['black', 'dimgrey', 'grey','silver','lightgrey']  
+            'colfam': "mediumpurple",
+            'colors': ["indigo","magenta","violet"]
         },
         13: {
-            'colfam': "mediumpurple",
-            'colors': ["indigo","darkviolet","mediumpurple","magenta","violet"] 
+            'colfam': 'k',
+            'colors': ['black','lightgrey']
         },
         14: {
             'colfam': "forestgreen",
-            'colors': ["darkgreen","forestgreen","seagreen","green","limegreen"] 
+            'colors': ["darkgreen","limegreen"] 
         },
         15: {
             'colfam': "orange",
-            'colors': ["goldenrod","darkorange","orange","gold","yellow"] 
+            'colors': ["darkgoldenrod","yellow"] 
         },
         16: {
-            'colfam': 'blue',
-            'colors': ['navy', "steelblue",'blue', 'dodgerblue','lightskyblue']
+            'colfam': 'navy',
+            'colors': ['navy', 'royalblue']
         },
         17: {
             'colfam': "orange",
-            'colors': ["goldenrod","darkorange","orange","gold","yellow"] 
+            'colors': ["darkgoldenrod","yellow"] 
         },
     }
     
@@ -322,6 +323,7 @@ def get_colors_dict(n):
 def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,tor_coupl):
     im = plt.figure(figsize=(9,8))
     i,j,k=0,0,0
+    pol_num = 6
     
     #Information about the dominant modes
     plt.annotate(f"Dominant Mode: {dm}", xy=(0.01, 0.335), xycoords='axes fraction', fontsize = 15)    
@@ -350,16 +352,19 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
     for m in tor_coupl:
         i,j=0,0
         d = get_colors_dict(m)
-       
+        cmap = mc.LinearSegmentedColormap.from_list("", d["colors"])
+        
         for col in df.columns:
             if f"/ {m}" in col or f"/{m}" in col:
                 if "I" in col:
-                    plt.plot(r,df[col],"--",color=d['colors'][i],linewidth=1.5)
+                    plt.plot(r,df[col],"--",color=cmap(i/pol_num),linewidth=1.5)
                     i += 1
                 if "R" in col:
-                    plt.plot(r,df[col],color=d['colors'][j],linewidth=1.5)
+                    plt.plot(r,df[col],color=cmap(i/pol_num),linewidth=1.5)
                     j += 1
-       
+    
+    print(tor_coupl) 
+    
     plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz",fontsize=22)               
     plt.xlabel("r/a",fontsize=20)
     plt.ylabel(r"$\delta \Phi$",fontsize=20)
