@@ -276,11 +276,11 @@ def get_colors_dict(n):
             'colors': ['darkgreen','lime']
         },
     8: {
-            'colfam': 'red',
-            'colors': ['darkred','salmon']
+            'colfam': 'springgreen',
+            'colors': ["green","springgreen"]
         },
     9: {
-            'colfam': "green",
+            'colfam': "red",
             'colors': ["darkred","red"] 
         },
     10: {
@@ -300,8 +300,9 @@ def get_colors_dict(n):
             'colors': ["black","silver"]
         },
     14: {
-            'colfam': "springgreen",
-            'colors': ["green","springgreen"] 
+            'colfam': "red",
+            'colors': ['darkred','salmon']
+ 
         },
     15: {
             'colfam': "orange",
@@ -368,7 +369,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
     plt.ylabel(r"$\delta \Phi$",fontsize=20)
     plt.grid(True)
     plt.legend(loc="lower left")
-    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=300)
+    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=350)
 
 
 #Creates an array of sorted plots for panoramic visualization
