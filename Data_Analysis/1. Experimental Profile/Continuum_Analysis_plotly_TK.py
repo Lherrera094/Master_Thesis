@@ -34,11 +34,9 @@ def read_dataframe(x):
 
 
 # %%
-
-
 def read_df(x,prof):
     df = pd.read_excel(f"n{x}/Output_{prof}_n{x}.xlsx")
-    df = df.drop(df[df[f"radial_pos_maximum"] > 0.81].index)
+    df = df.drop(df[df[f"radial_pos_maximum"] > 0.8].index)
     return df
 
 
@@ -149,6 +147,17 @@ def individual_helical_plot(df,f_max,dict_fam,path):
     
     # plot the data
     fig = go.Figure()
+    
+    fig = px.scatter(df,
+                     x = "radial_pos_maximum",
+                     y = "f(kHz)",
+                     size = "width",
+                     color = "Growth Rate",
+                     symbol = "Alfvén_mode",
+                     hover_data=["efast","beta","dominant_mode"],
+                     labels=dict(beta = "Beta_f",
+                                 radial_pos_maximum="Position",
+                                 dominant_mode = "Dominant Mode"))
 
     for i in dict_fam["continuum"]:
         df_cont,colors = alfv_continuum_read(i,f_max,path)
@@ -160,20 +169,19 @@ def individual_helical_plot(df,f_max,dict_fam,path):
                                         color=colors   
                                         ),
                                         name = f"n={i}"))
-
-    fig = fig.add_trace(go.Scatter(x = df["radial_pos_maximum"],
-                                   y = df[f"f(kHz)"], 
-                                    mode='markers',
-                                    marker=dict(
-                                    size=5,
-
-                                    ),
-                                    name = 'dominant_mode'))
-
+    fig.update_layout(
+                hoverlabel=dict(
+                bgcolor="white",
+                font_size=16,
+                font_family="Rockwell"
+                            )
+                        )
+    fig.update_coloraxes(showscale=False)
+    
     fig.update_layout(
         title={
             'text': f"Alfvén Continuum {title}",
-            'y': 0.9,  # Adjust the vertical position of the title
+            'y': 1.0,  # Adjust the vertical position of the title
             'x': 0.5,  # Set the x position to center the title
             'xanchor': 'center',
             'yanchor': 'top',
@@ -185,6 +193,7 @@ def individual_helical_plot(df,f_max,dict_fam,path):
     fig.update_layout(yaxis_range=[0,300])
     fig.update_layout(xaxis_range=[0,1])
     fig.show()
+    fig.write_html("Experimental profile.html")
 
 
 # %%
