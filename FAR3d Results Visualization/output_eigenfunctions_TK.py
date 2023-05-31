@@ -43,6 +43,7 @@ def sort_key(item):
     first, last = parts[0].split('_')
     return float(first), -float(last)
 
+#Compares the values of growth rate for the toroidal modes 
 def check_convergence(list_modes):
     val_0 = list_modes[0]
     chek = True
@@ -122,7 +123,7 @@ def plasma_parameters(directory,profiles,frec):
     return f, energy, beta, kev
 
 
-#From farprt obtains frequency and growth rate, checks convergence of the simulation
+#From farprt obtains frequency and growth rate, and checks convergence of the simulation
 def get_main_data(f):
     data = open(f+'/farprt')
     ndata = data.readlines()
@@ -254,8 +255,8 @@ def get_colors_dict(n):
             'colors': ["navy","royalblue"]             
         },
     3: {
-            'colfam': 'forestgreen',
-            'colors': ["forestgreen","lawngreen"]             
+            'colfam': "darkslategrey",
+            'colors': ["darkslategrey","darkturquoise"]             
         },
 	4: {
             'colfam': "brown",
@@ -305,16 +306,16 @@ def get_colors_dict(n):
  
         },
     15: {
-            'colfam': "orange",
-            'colors': ["darkgoldenrod","yellow"] 
+            'colfam': "brown",
+            'colors': ["brown","peachpuff"] 
         },
     16: {
             'colfam': 'mediumvioletred',
             'colors': ["mediumvioletred","palevioletred"]
         },
     17: {
-            'colfam': "darkslategrey",
-            'colors': ["darkslategrey","darkturquoise"] 
+            'colfam': 'green',
+            'colors': ["forestgreen","lawngreen"] 
         },
     }
     
@@ -358,10 +359,10 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
         for col in df.columns:
             if f"/ {m}" in col or f"/{m}" in col:
                 if "I" in col:
-                    plt.plot(r,df[col],"--",color=cmap(i/pol_num),linewidth=1.5)
+                    plt.plot(r,df[col],"--",color=cmap(i/pol_num),linewidth=2)
                     i += 1
                 if "R" in col:
-                    plt.plot(r,df[col],color=cmap(i/pol_num),linewidth=1.5)
+                    plt.plot(r,df[col],color=cmap(i/pol_num),linewidth=2)
                     j += 1 
     
     plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz",fontsize=22)               
