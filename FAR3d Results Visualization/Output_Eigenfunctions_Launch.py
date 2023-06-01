@@ -13,7 +13,7 @@ from output_eigenfunctions_TK import *
 
 
 #Name the Output file as needed 
-profile_name = "Exp"
+profile_name = "0.15"
 l = 0
 
 #Loop to read all files from pathhhh
