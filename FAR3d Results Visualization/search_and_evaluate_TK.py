@@ -57,3 +57,27 @@ def remove_files(direct):
     for f in file:
         if f in deleted_list:
             os.remove(direct + "/"+f)
+
+
+#returns the modes in the form n/m
+def change_modes_order(mode):
+    
+    modes = mode.split("/")
+    n = modes[1]
+
+    if "-" in modes[0]:
+        m = modes[0].split("-") 
+        m = m[-1]
+
+    elif "  " in modes[0]: 
+        m = modes[0].split("  ") 
+        m = m[-1]
+
+    else:
+        m = modes[0].split(" ") 
+        m = m[-1]
+
+    inverted_mode = f"{n}/{m}"
+
+    return inverted_mode
+

@@ -10,10 +10,15 @@
 import sys 
 sys.path.append('FAR3_libraries/')
 from output_eigenfunctions_TK import *
+from plot_functions_TK import *
 
 
 #Name the Output file as needed 
-profile_name = "0.15"
+profile_name = "Profile"
+
+#Give the maximum number of poloidal modes
+num_poloidal = 10
+
 l = 0
 
 #Loop to read all files from pathhhh
@@ -43,7 +48,7 @@ for file in files:
         if exist == False:
             plot_eigenfunctions(dominant_mode,dominant_mode_2,dominant_mode_3,
                                 alfmode,radial_pos,radial_pos_2,radial_pos_3,df,r,
-                                energy,beta,frequency,saving_file,toroidal_coupl) 
+                                energy,beta,frequency,saving_file,toroidal_coupl, num_poloidal) 
         
     except Exception as e:
         print(f"Error: {e}")

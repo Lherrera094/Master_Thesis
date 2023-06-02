@@ -97,10 +97,12 @@ def get_colors_dict(n):
     
     return d[n]
 
-def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,tor_coupl):
+def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,tor_coupl, num_pol):
     im = plt.figure(figsize=(9,8))
     i,j,k=0,0,0
-    pol_num = 6
+
+    dm = change_modes_order(dm)
+    dm2 = change_modes_order(dm2)
     
     #Information about the dominant modes
     plt.annotate(f"Dominant Mode (n/m): {dm}", xy=(0.55, 0.08), xycoords='axes fraction', fontsize = 15)    
@@ -115,6 +117,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
         plt.axvline(rp/1000,color="red",linewidth=1)
             
     if rp3 != "--":
+        dm3 = change_modes_order(dm3)
         plt.axvline(rp3/1000,color="k",linestyle="--",linewidth=1)
         plt.annotate(f"2nd Coupled (n/m): {dm3}", xy=(0.55, 0.02), xycoords='axes fraction', fontsize = 15)                 
     
@@ -134,10 +137,10 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
         for col in df.columns:
             if f"/ {m}" in col or f"/{m}" in col:
                 if "I" in col:
-                    plt.plot(r,df[col],"--",color=cmap(i/pol_num),linewidth=2)
+                    plt.plot(r,df[col],"--",color=cmap(i/num_pol),linewidth=2)
                     i += 1
                 if "R" in col:
-                    plt.plot(r,df[col],color=cmap(i/pol_num),linewidth=2)
+                    plt.plot(r,df[col],color=cmap(i/num_pol),linewidth=2)
                     j += 1 
     
     plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz",fontsize=22)               

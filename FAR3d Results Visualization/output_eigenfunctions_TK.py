@@ -200,6 +200,11 @@ def get_values(data_frame):
         m2 = n2[0].split(" ")
         m_1,m_2 = int(m1[-1]),int(m2[-1])
 
+    except Exception as error:
+        m1 = n1[0].split("  ") 
+        m2 = n2[0].split("  ")
+        m_1,m_2 = int(m1[-1]),int(m2[-1])
+
     n_1,n_2 = int(n1[1]),int(n2[1])
     
     try:
