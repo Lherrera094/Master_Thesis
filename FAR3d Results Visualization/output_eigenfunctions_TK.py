@@ -49,7 +49,7 @@ def plasma_parameters(directory,profile,frec):
     farprt_data = open(directory + '/farprt')
     nfarprt_data = farprt_data.readlines()
     
-    profile, exist = find_profiles(directory)
+    #profile, exist = find_profiles(directory)
     
     #read external profiles
     data = open(directory + '/' + profile)
