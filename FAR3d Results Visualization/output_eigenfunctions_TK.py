@@ -328,9 +328,9 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
     pol_num = 6
     
     #Information about the dominant modes
-    plt.annotate(f"Dominant Mode: {dm}", xy=(0.65, 0.13), xycoords='axes fraction', fontsize = 15)    
-    plt.annotate(f"Coupled: {dm2}", xy=(0.65, 0.10), xycoords='axes fraction', fontsize = 15)             
-    #plt.annotate(f"Alfvén Mode: {alfm}", xy=(0.75, 0.17), xycoords='axes fraction', fontsize = 15)
+    plt.annotate(f"Dominant Mode (n/m): {dm}", xy=(0.55, 0.13), xycoords='axes fraction', fontsize = 15)    
+    plt.annotate(f"Coupled (n/m): {dm2}", xy=(0.55, 0.10), xycoords='axes fraction', fontsize = 15)             
+    #plt.annotate(f"Alfvén Mode: {alfm}", xy=(0.55, 0.17), xycoords='axes fraction', fontsize = 15)
     
     #Marking lines and annotations    
     if 6 in tor_coupl:
@@ -341,7 +341,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
             
     if rp3 != "--":
         plt.axvline(rp3/1000,color="k",linestyle="--",linewidth=1)
-        plt.annotate(f"2nd Coupled: {dm3}", xy=(0.65, 0.07), xycoords='axes fraction', fontsize = 15)                 
+        plt.annotate(f"2nd Coupled (n/m): {dm3}", xy=(0.55, 0.07), xycoords='axes fraction', fontsize = 15)                 
     
     for n in tor_coupl:
         d = get_colors_dict(n)
