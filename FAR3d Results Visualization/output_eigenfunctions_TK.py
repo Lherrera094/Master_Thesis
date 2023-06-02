@@ -2,7 +2,7 @@
 # coding: utf-8
 # +
 # Developer: Luis Carlos Herrera Quesada
-# Date: 27/04/2023
+# Date: 02/06/2023
 # Universidad Carlos III de Madrid
 # -
 
@@ -16,74 +16,58 @@ from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 from PIL import Image
 import matplotlib.colors as mc
-import os
 
+from search_and_evaluate_TK import *
 
 #Read all folders and create the folder to save the plots
 def create_files():
+    
     act_dir = os.listdir()
-    saving_file = "Eigenfunction_plots/"
-    file = sorted(list(filter(lambda act_dir: "efast" in act_dir, act_dir)))
-    if not os.path.exists(saving_file):
-        os.makedirs(saving_file)
-
+    folders = find_farprt(act_dir)
+    file = sorted(folders)
+    
+    #creates a dataframe to savel results
     results = pd.DataFrame(columns=['beta', 'efast', 'dominant_mode', 'radial_pos_maximum','width_i','width_f',
                                     'width','coupling','radial_pos_2','Possible_EAE',
                                     'radial_pos_3','Alfvén_mode','Growth Rate',
                                     'Frequency','f(kHz)'])
     
+    saving_file = "Eigenfunction_plots/" #Folder to save the eigenfunctions
+    if not os.path.exists(saving_file):
+        os.makedirs(saving_file)
+        
     main_file = list(filter(lambda act_dir: "00_main" in act_dir, act_dir))
     main_file = os.listdir(main_file[0])
     txt = list(filter(lambda main_file: ".txt" in main_file, main_file))[0]
     
-    return results,file,txt,saving_file
-
-def sort_key(item):
-    parts = item.split('.png')
-    first, last = parts[0].split('_')
-    return float(first), -float(last)
-
-#Compares the values of growth rate for the toroidal modes 
-def check_convergence(list_modes):
-    val_0 = list_modes[0]
-    chek = True
-
-    #Compare items in list
-    for val in list_modes:
-        if val_0 != val:
-            chek = False
-            break
-
-    return chek
-
-#Remove not used files for each folder
-def remove_files(direct):
-    deleted_list = ["xfar3d","fs00000","fort87","fs00001","fs00002","fs00003","fs00004",
-                    "fs00005","fs00006","fs00007","fs00008","fs00009"]
-    file = os.listdir(direct)
-    for f in file:
-        if f in deleted_list:
-            os.remove(direct + "/"+f)
+    return results, file, txt, saving_file
 
 
 #From farprt and profiles.dat obtains the relevant plasma characteristics
-def plasma_parameters(directory,profiles,frec):
-    in_data = open(directory + '/farprt')
-    nin_data = in_data.readlines()
-    data = open(directory + '/' + profiles)
+def plasma_parameters(directory,profile,frec):
+    #Read farprt
+    farprt_data = open(directory + '/farprt')
+    nfarprt_data = farprt_data.readlines()
+    
+    profile, exist = find_profiles(directory)
+    
+    #read external profiles
+    data = open(directory + '/' + profile)
     ndata = data.readlines()
+    
+    #constants
     mi = 1.67e-27
     mu_0 = 1.25664e-06
     e = 1.602e-19
     
     #EP energy
-    tline = [idx for idx,line in enumerate(nin_data) if 'cvfp:' in line][0] + 1
-    kev = nin_data[tline].split(",")
-    kev = float(kev[0])
+    tline = [idx for idx,line in enumerate(nfarprt_data) if 'cvfp:' in line][0] + 1
+    cvfp = nfarprt_data[tline].split(",")
+    cvfp = float(cvfp[0])
     
     #EP beta
-    tline = [idx for idx,line in enumerate(nin_data) if 'bet0_f' in line][0] + 1
-    beta = nin_data[tline].split("\t")
+    tline = [idx for idx,line in enumerate(nfarprt_data) if 'bet0_f' in line][0] + 1
+    beta = nfarprt_data[tline].split("\t")
     beta = float(beta[0])
     
     #Magnetic Field
@@ -118,9 +102,9 @@ def plasma_parameters(directory,profiles,frec):
     #Frecuency
     f = (frec*Va)/(2*np.pi*R*1000*q)
     #Energy
-    energy = mi*(kev*Va)**2/(e*1000)
+    energy = mi*(cvfp*Va)**2/(e*1000)
     
-    return f, energy, beta, kev
+    return f, energy, beta, cvfp
 
 
 #From farprt obtains frequency and growth rate, and checks convergence of the simulation
@@ -240,188 +224,6 @@ def get_values(data_frame):
             alfmode = "TAE/EAE"
     
     return dominant_mode, radial_pos, dominant_mode_2, radial_pos_2,dominant_mode_3, radial_pos_3, alfmode, x1, x2, width
-
-
-def get_colors_dict(n):
-    n = int(n)
-    
-    d =  {
-	1: {
-            'colfam': "black",
-            'colors': ['black','silver'] 
-        },
-	2: {
-            'colfam': 'navy',
-            'colors': ["navy","royalblue"]             
-        },
-    3: {
-            'colfam': "darkslategrey",
-            'colors': ["darkslategrey","darkturquoise"]             
-        },
-	4: {
-            'colfam': "brown",
-            'colors': ["saddlebrown","sandybrown"] 
-        },
-        
-    5: {
-            'colfam': 'blue',
-            'colors': ['navy','lightskyblue']
-        },
-    6: {
-            'colfam': 'darkturquoise',
-            'colors': ['darkcyan','cyan']
-        },
-        
-    7: {
-            'colfam': 'limegreen',
-            'colors': ['darkgreen','lime']
-        },
-    8: {
-            'colfam': 'springgreen',
-            'colors': ["green","springgreen"]
-        },
-    9: {
-            'colfam': "red",
-            'colors': ["darkred","red"] 
-        },
-    10: {
-            'colfam': "orange",
-            'colors': ["darkgoldenrod","yellow"] 
-        },
-    11: {
-            'colfam': "darkmagenta",
-            'colors': ["darkmagenta","magenta"] 
-        },
-    12: {
-            'colfam': "olive",
-            'colors': ["olive","darkkhaki"]
-        },
-    13: {
-            'colfam': 'k',
-            'colors': ["black","silver"]
-        },
-    14: {
-            'colfam': "red",
-            'colors': ['darkred','salmon']
- 
-        },
-    15: {
-            'colfam': "dodgerblue",
-            'colors': ["steelblue","lightskyblue"] 
-        },
-    16: {
-            'colfam': 'mediumvioletred',
-            'colors': ["mediumvioletred","palevioletred"]
-        },
-    17: {
-            'colfam': 'green',
-            'colors': ["forestgreen","lawngreen"] 
-        },
-    }
-    
-    return d[n]
-
-
-def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,tor_coupl):
-    im = plt.figure(figsize=(9,8))
-    i,j,k=0,0,0
-    pol_num = 6
-    
-    #Information about the dominant modes
-    plt.annotate(f"Dominant Mode (n/m): {dm}", xy=(0.55, 0.08), xycoords='axes fraction', fontsize = 15)    
-    plt.annotate(f"Coupled (n/m): {dm2}", xy=(0.55, 0.05), xycoords='axes fraction', fontsize = 15)             
-    #plt.annotate(f"Alfvén Mode: {alfm}", xy=(0.55, 0.17), xycoords='axes fraction', fontsize = 15)
-    
-    #Marking lines and annotations    
-    if 6 in tor_coupl:
-        plt.axvline(rp/1000,color="blue",linewidth=1)
-            
-    else:
-        plt.axvline(rp/1000,color="red",linewidth=1)
-            
-    if rp3 != "--":
-        plt.axvline(rp3/1000,color="k",linestyle="--",linewidth=1)
-        plt.annotate(f"2nd Coupled (n/m): {dm3}", xy=(0.55, 0.02), xycoords='axes fraction', fontsize = 15)                 
-    
-    for n in tor_coupl:
-        d = get_colors_dict(n)
-        plt.axhline(0,xmin = 0.05, xmax = 0.06,color=d["colfam"],linewidth=2,label=f"n= {n}")                   
-        k += 1
-                
-    plt.axvline(rp2/1000,color="k",linewidth=1)
-    
-    #plot Eigenfunctions
-    for m in tor_coupl:
-        i,j=0,0
-        d = get_colors_dict(m)
-        cmap = mc.LinearSegmentedColormap.from_list("", d["colors"])
-        
-        for col in df.columns:
-            if f"/ {m}" in col or f"/{m}" in col:
-                if "I" in col:
-                    plt.plot(r,df[col],"--",color=cmap(i/pol_num),linewidth=2)
-                    i += 1
-                if "R" in col:
-                    plt.plot(r,df[col],color=cmap(i/pol_num),linewidth=2)
-                    j += 1 
-    
-    plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz",fontsize=22)               
-    plt.xlabel("r/a",fontsize=20)
-    plt.ylabel(r"$\delta \Phi$",fontsize=20)
-    plt.grid(True)
-    plt.legend(loc="upper right",prop={'size':18})
-    plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=350)
-
-
-#Creates an array of sorted plots for panoramic visualization
-def eigenfunction_maps(directory):
-    images = []
-    
-    #Arrange list in descending order for energy and ascending for beta
-    act_dir = sorted(os.listdir(directory)) #makes a list of the images names 
-    act_dir = sorted(act_dir, key=sort_key,reverse=True)
-         
-    #Gets the number of energy plots for the array of images
-    my_list = [f.split("_")[0] for f in act_dir]
-    unique_elements = sorted(set(my_list),reverse=True)
-    columns = []
-    for element in unique_elements:
-        count = my_list.count(element)
-        columns.append(count)
-        
-    column_num = max(columns)
-    row_num = len(columns)
-    
-    # Loop through the directory and add the images to a list
-    for filename in act_dir:
-        if filename.endswith('.jpg') or filename.endswith('.png'):
-            images.append(Image.open(os.path.join(directory, filename)))
-            
-    # Calculate the width and height of the output image
-    output_width = int(column_num*(images[0].size[0]/2))
-    output_height = int(row_num*(images[0].size[1]/2))
-
-    #Create a new image
-    output_image = Image.new('RGB', (output_width, output_height))
-    
-    # Loop through the images and paste them onto the output image
-    row_count,column_count = 0,0
-    num_col = 0
-    x,i = 0,0 #x:image position for each column,i:image position for each column
-    
-    for image in images:
-        if column_count == columns[num_col]:
-            num_col += 1
-            column_count = 0
-            x = 0
-            i += int(output_height/row_num) 
-        
-        output_image.paste(image.resize((int(image.size[0]/2), 
-                                         int(image.size[1]/2))), (x, i))
-        x += int(image.size[0]/2)  #Position in x for the image
-        column_count += 1    
-        
-    output_image.save("Eigenfunctions_full.jpg")
 
 
 def dominant_mode_width(max_dataframe):
