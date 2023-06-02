@@ -53,7 +53,7 @@ def alfv_continuum_read(x,f_max,path):
     
     color = ["white","black","navy","darkslategrey","sandybrown","blue","darkturquoise",
               "limegreen","springgreen","darkred","orange","darkmagenta","olive",
-             "grey","red","brown","mediumvioletred","forestgreen"]
+             "grey","red","dodgerblue","mediumvioletred","forestgreen"]
     
     return df, color[x]
 
