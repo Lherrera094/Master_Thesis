@@ -81,3 +81,15 @@ def change_modes_order(mode):
 
     return inverted_mode
 
+
+def get_number_line(line):
+    #array to save the number values in array
+    value = []
+    for char in line:
+        if char.isdigit() or char == ".":
+            value.append(char)
+
+    new_value = "".join(value)
+    new_value = float(new_value)
+
+    return new_value

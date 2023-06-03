@@ -143,9 +143,10 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
                     plt.plot(r,df[col],color=cmap(i/num_pol),linewidth=2)
                     j += 1 
     
-    plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz",fontsize=22)               
-    plt.xlabel("r/a",fontsize=20)
-    plt.ylabel(r"$\delta \Phi$",fontsize=20)
+    plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz", fontsize=24)               
+    plt.xlabel("r/a")
+    plt.ylabel(r"$\delta \Phi$")
+    plt.rcParams['axes.labelsize'] = 22
     plt.grid(True)
     plt.legend(loc="upper right",prop={'size':18})
     plt.savefig(f"{sav_file}{round(energy)}_{beta}.png",dpi=350)

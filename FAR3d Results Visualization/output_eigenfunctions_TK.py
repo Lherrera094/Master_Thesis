@@ -72,21 +72,18 @@ def plasma_parameters(directory,profile,frec):
     
     #Magnetic Field
     tline = [idx for idx,line in enumerate(ndata) if 'Vacuum' in line][0] + 1
-    B = ndata[tline].split("\t")
-    B = B[1].split("\n")
-    B = float(B[0])
+    B = ndata[tline]
+    B = get_number_line(B)
     
     #Major Radius
     tline = [idx for idx,line in enumerate(ndata) if 'Geometric Center' in line][0] + 1
-    R = ndata[tline].split("\t")
-    R = R[1].split("\n")
-    R = float(R[0])
+    R = ndata[tline]
+    R = get_number_line(R)
     
     #Main Ion species mass/proton
     tline = [idx for idx,line in enumerate(ndata) if 'Main Ion' in line][0] + 1
-    M = ndata[tline].split("\t")
-    M = M[0].split(" ")
-    M = float(M[4])
+    M = ndata[tline]
+    M = get_number_line(M)
     
     #Density and safety factor
     tline = [idx for idx,line in enumerate(ndata) if 'Rho' in line][0] + 1
