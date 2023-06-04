@@ -23,7 +23,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
 
 <p align="center">
   
-![Couplings](/FAR3d%20Results%20Visualization/Examples/20.0_0.1.png)
+![Couplings](/FAR3d%20Results%20Visualization/Examples/20.0_0.25.png)
   
 </p>
 
