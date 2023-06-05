@@ -95,7 +95,7 @@ def plot_iota(iota_df,device):
     r = np.linspace(0,1,len(iota_df))
     
     plt.plot(r,iota_df,"darkcyan",label = r"$\iota$ profile",linewidth = 1.5)
-    plt.title(f"Iota {device} Profile",size=22)
+    plt.title(f"Rotational Transform {device}",size=22)
     plt.ylabel(r"$\iota$",fontsize=20)
     plt.xlabel("r/a",fontsize=20)
     plt.grid(True)
@@ -178,7 +178,7 @@ def plot_coupling_modes(coupl,period,folder,pos,dataframe,s,ref_i):
     plt.savefig(f"{folder}/{round(iota_max,2)}_iota_Couplings.png",dpi=600)
 
 #Plot of resonant modes
-def plot_resonant_modes(coupl,period,folder,dataframe,ref_i):
+def plot_resonant_modes_special(coupl,period,folder,dataframe,ref_i):
     col = ["blue","darkorange","green","red"]
     ls = ["-.","--",":","-."]
     j = 0
@@ -242,6 +242,73 @@ def plot_resonant_modes(coupl,period,folder,dataframe,ref_i):
     plt.tick_params(axis='both',labelsize=14)
     plt.grid(True)
     plt.savefig(f"{folder}/delta_iota_{di}_Resonant.png",dpi=600)
+    
+    #Plot of resonant modes
+def plot_resonant_modes(coupl,period,folder,iota_df,ref_i):
+    col = "jet"
+    ls = ["-.","--",":","-."]
+    j = 0
+    
+    # %matplotlib notebook
+    
+    iota_max = max(abs(dataframe["       iota"]))
+    di = round(iota_max - ref_i,2)
+    title = f"($\Delta\iota$={di})"
+    
+    if di == 0:
+        di = title = f"(Experimental)"
+    
+    n_fam = get_families(coupl,period)
+    r = [0,0.2,0.4,0.6,0.8,1.0]
+    new_res_df = coupl.dropna()
+    count = new_res_df["n/m"].value_counts().to_dict()
+    flag = new_res_df["n/m"].value_counts().to_dict()
+    for key in flag:
+        flag[key] = 0
+        
+    for i in n_fam:
+        m = 0
+        res_modes = new_res_df[new_res_df["n"].isin(n_fam[i])]
+        res_modes_df = res_modes["n/m"]
+        lab_n = res_modes["n"].values
+        lab_n = np.unique(lab_n)
+        lab_m = res_modes["m"].values
+        lab_m = np.unique(lab_m)
+        
+        for y_val in res_modes_df:
+            if count[y_val] != 1:
+                a = 1.3
+                x = (flag[y_val]*0.09*a)
+                flag[y_val] += 1
+            else:
+                x = 0
+            
+            plt.axhline(y=y_val, color = col[j], linestyle = ls[j])
+            if count[y_val] > 1 and flag[y_val] < count[y_val]:
+                plt.text(0 + x,y_val-0.007, f"{int(lab_n[m])}/{int(lab_m[m])},",
+                         color = col[j],size = 14)
+                
+            elif count[y_val] > 1 and flag[y_val] == count[y_val]:
+                plt.text(0 + x,y_val-0.007, f"{int(lab_n[m])}/{int(lab_m[m])}",
+                         color = col[j],size = 14)
+            else:
+                plt.text(1.057,y_val-0.002, f"{int(lab_n[m])}/{int(lab_m[m])}",
+                         color = col[j],size = 14)
+            m += 1
+        j += 1
+        
+    plt.plot(dataframe["        r"],abs(dataframe["       iota"]),"darkcyan",
+             label = r"$\iota$ profile",linewidth = 1.5)
+    
+    #Axis 1:Figure i vs n
+    plt.title(f"Resonant Modes {title}",size=19)
+    plt.xlabel("r/a",fontsize=20)
+    plt.ylabel(r"Rotational Transform",fontsize=20)
+    plt.xticks(r)
+    plt.tick_params(axis='both',labelsize=14)
+    plt.grid(True)
+    plt.savefig(f"{folder}/delta_iota_{di}_Resonant.png",dpi=600)
+    
     
 #Plot of all iota profiles to study
 def plot_all_iota(set_df):
