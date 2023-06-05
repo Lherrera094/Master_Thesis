@@ -11,19 +11,23 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import netCDF4 as nc
 
 
 #read the file profiles.dat
 def read_data_iota(file):
     data = pd.read_csv(f"{file}/profiles.dat",sep="\t")
- 
     return data
 
+def read_VMEC_iota(path,file):
+    vmec_file = nc.Dataset(f"{path}/{file}","r")
+    iota = vmec_file.variables["iotaf"][:]
+    return iota
+
 #Obtain all coupling in the iota boundaries
-def resonance_coupling(dataframe,error):
-    #iota_min = min(abs(dataframe["       iota"]))
-    iota_max = max(abs(dataframe["       iota"]))
-    iota_min = 1.2
+def resonance_coupling(iota_df,error):
+    iota_min = min(abs(iota_df))
+    iota_max = max(abs(iota_df))
     
     n_families = np.linspace(1,17,17)
     
@@ -70,9 +74,11 @@ def resonance_coupling(dataframe,error):
 
 
 #General Plot of the iota
-def plot_iota(dataframe,iota_value):
-    plt.plot(dataframe["        r"],dataframe["       iota"],
-             "darkcyan",label = r"$\iota$ profile",linewidth = 1.5)
+def plot_iota_special(iota_df,device):
+    
+    r = np.linspace(0,1,len(iota_df))
+    
+    plt.plot(r,iota_df,"darkcyan",label = r"$\iota$ profile",linewidth = 1.5)
     
     if "_" in iota_value:
         i_value = iota_value.split("_")[1]
@@ -83,6 +89,19 @@ def plot_iota(dataframe,iota_value):
     plt.grid(True)
     plt.show()
     plt.savefig(f"{iota_value}/TJII_iota.jpg",dpi=600)
+    
+#General Plot of the iota
+def plot_iota(iota_df,device):
+    r = np.linspace(0,1,len(iota_df))
+    
+    plt.plot(r,iota_df,"darkcyan",label = r"$\iota$ profile",linewidth = 1.5)
+    plt.title(f"Iota {device} Profile",size=22)
+    plt.ylabel(r"$\iota$",fontsize=20)
+    plt.xlabel("r/a",fontsize=20)
+    plt.grid(True)
+    plt.show()
+    plt.savefig(f"{device}/{device}_iota.jpg",dpi=600)
+    
 
 
 #Obtain the coupled toroidal families
