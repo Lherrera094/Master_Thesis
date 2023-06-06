@@ -143,7 +143,7 @@ def plot_eigenfunctions(dm,dm2,dm3,alfm,rp,rp2,rp3,df,r,energy,beta,f,sav_file,t
                     plt.plot(r,df[col],color=cmap(i/num_pol),linewidth=2)
                     j += 1 
     
-    plt.title(f"EP {round(energy)} keV/ "+ r"$\beta$:"+f"{beta}/ $f$: {round(f)} kHz", fontsize=24)               
+    plt.title(r"$T_{f}:$" + f"{round(energy)} keV/ "+ r"$\beta_{f}$:"+f"{beta}/ $f$: {round(f)} kHz", fontsize=24)               
     plt.xlabel("r/a")
     plt.ylabel(r"$\delta \Phi$")
     plt.rcParams['axes.labelsize'] = 22
