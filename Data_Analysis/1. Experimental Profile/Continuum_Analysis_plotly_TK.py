@@ -48,11 +48,11 @@ def alfv_continuum_read(x,f_max,path):
     df = pd.read_csv(f"{path}output_column_n={x}.txt", sep="\t")
     df.columns = ["r",f"n={x}"]
     df["r"] = np.sqrt(df["r"]) 
-    df = df.drop(df[df[f"n={x}"] <= 10].index)
+    df = df.drop(df[df[f"n={x}"] <= 5].index)
     df = df.drop(df[df[f"n={x}"] > f_max].index)
     
     color = ["white","black","navy","darkslategrey","sandybrown","blue","darkturquoise",
-              "limegreen","springgreen","darkred","orange","darkmagenta","olive",
+              "forestgreen","springgreen","darkred","orange","darkmagenta","olive",
              "grey","red","dodgerblue","mediumvioletred","forestgreen"]
     
     return df, color[x]
@@ -65,8 +65,8 @@ def family_information(fam):
     
     dictionary = {
         "n7": {
-            "title": "n=7,11,15",
-            "continuum": [7,11,15],
+            "title": "n=3,7,11,15",
+            "continuum": [3,7,11,15],
             "colors": ["green","indigo","orange"],
             "ylim_f":[0,300],
             "ylim_gr":[0,1],
@@ -198,13 +198,12 @@ def individual_helical_plot(df,f_max,dict_fam,path,save_file,fam,image_path):
     fig.update_layout(xaxis_range=[0.1,1.1])
     
     fig.show()
+    fig.write_image(f"{save_file}/{title}_Contiuum.png",width=800, height=600, scale=3)
     fig.write_html(f"{save_file}/Experimental_profile_{title}.html")
 
 
 # %%
-def maximum_instability(df5,df6,df7):
-    
-    col_drop = ["dominant_mode","radial_pos_maximum","coupling","link_to_image"]
+def maximum_instability_energy(df5,df6,df7):
     
     E_ep_n5, beta_n5, gr5 = get_max_gr(df5)
     E_ep_n6, beta_n6, gr6 = get_max_gr(df6)
@@ -215,26 +214,28 @@ def maximum_instability(df5,df6,df7):
     maximum = check_max_value(max_gr)
     
     if maximum == gr5:
+        gr = gr5
+        beta = beta_n5
         E_ep_h = E_ep_n5
+        fam = "n = 5,9,13,17"
     
     elif max_gr == gr6:
+        gr = gr6
+        beta = beta_n6
         E_ep_h = E_ep_n6
+        fam = "n = 6,10,14"
     
     else:
+        gr = gr7
+        beta = beta_n7
         E_ep_h = E_ep_n7
+        fam = "n=7,11,15"
     
     df_new_n5 = df5.drop(df5[df5['efast'] != E_ep_h].index)
     df_new_n6 = df6.drop(df6[df6['efast'] != E_ep_h].index)
     df_new_n7 = df7.drop(df7[df7['efast'] != E_ep_h].index)
     
-    # Drop multiple columns
-    col_drop = ["dominant_mode","radial_pos_maximum","coupling","link_to_image"]
-    
-    df_new_n5 = df_new_n5.drop(col_drop, axis=1)
-    df_new_n6 = df_new_n6.drop(col_drop, axis=1)
-    df_new_n7 = df_new_n7.drop(col_drop, axis=1)
-    
-    return df_new_n5, df_new_n6, df_new_n7, E_ep_h
+    return df_new_n5, df_new_n6, df_new_n7, E_ep_h, gr, beta, fam
 
 
 # %%
@@ -259,3 +260,39 @@ def check_max_value(n_array):
             maximum = num
             
     return maximum
+
+
+# %%
+def maximum_instability_beta(df5,df6,df7):
+    
+    E_ep_n5, beta_n5, gr5 = get_max_gr(df5)
+    E_ep_n6, beta_n6, gr6 = get_max_gr(df6)
+    E_ep_n7, beta_n7, gr7 = get_max_gr(df7)
+    
+    max_gr = [gr5,gr6,gr7]
+    
+    maximum = check_max_value(max_gr)
+    
+    if maximum == gr5:
+        gr = gr5
+        beta = beta_n5
+        E_ep_h = E_ep_n5
+        fam = "n = 5,9,13,17"
+    
+    elif max_gr == gr6:
+        gr = gr6
+        beta = beta_n6
+        E_ep_h = E_ep_n6
+        fam = "n = 6,10,14"
+    
+    else:
+        gr = gr7
+        beta = beta_n7
+        E_ep_h = E_ep_n7
+        fam = "n=7,11,15"
+    
+    df_new_n5 = df5.drop(df5[df5['beta'] != beta].index)
+    df_new_n6 = df6.drop(df6[df6['beta'] != beta].index)
+    df_new_n7 = df7.drop(df7[df7['beta'] != beta].index)
+    
+    return df_new_n5, df_new_n6, df_new_n7, E_ep_h, gr, beta, fam
