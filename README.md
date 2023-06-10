@@ -39,7 +39,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
 
 <p align="center">
   
-![Couplings](/Data_Analysis/1. Experimental Profile/n=6,10,14_Contiuum.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
+![Couplings](/Data_Analysis/1.%20Experimental Profile/n=6,10,14_Contiuum.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
   
 </p>
 
