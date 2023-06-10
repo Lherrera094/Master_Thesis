@@ -3,8 +3,8 @@
 Supervisor: [Jacobo Varela](https://www.researchgate.net/profile/Jacobo-Varela)
 
 **Description**: The objective is to study the Alfvénic Eigenmodes activity on TJ-II Stellarator with hypotetical operation of NBI heating system for optimization. The analysis is performed using the linear version of the gyro-fluid code FAR3d. The Alfvén Continuum is computed with the STELLGAP code. The AE stability analysis is performed
-for the n = 3,7,11, 15, n = 5,9,13, 17, n = 6,10,14 helical families including EP populations with energies in the range of 10 - 90 keV and EP beta from 0.005 to
-0.1.
+for the n = 7,11, 15, n = 5,9,13, 17, n = 6,10,14 helical families including EP populations with energies in the range of 10 - 50 keV and EP beta from 0.1 to
+0.4.
 
 
 Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.es/bitstream/handle/10016/34630/Noninear_NF_2021.pdf?sequence=1) results. The next folder contains
