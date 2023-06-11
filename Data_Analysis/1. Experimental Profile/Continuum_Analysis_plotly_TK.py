@@ -34,6 +34,7 @@ def read_df(x,prof,fam):
     link_df = pd.DataFrame(local_host_image, columns=["link_to_image"])
     
     df = pd.read_excel(f"n{x}/Output_{prof}_n{x}.xlsx")
+    #df["radial_pos_maximum"] = np.sqrt(df["radial_pos_maximum"])
     df["link_to_image"] = link_df
     df = df.drop(df[df[f"radial_pos_maximum"] > 0.8].index)
     
@@ -65,8 +66,8 @@ def family_information(fam):
     
     dictionary = {
         "n7": {
-            "title": "n=3,7,11,15",
-            "continuum": [3,7,11,15],
+            "title": "n=7,11,15",
+            "continuum": [7,11,15],
             "colors": ["green","indigo","orange"],
             "ylim_f":[0,300],
             "ylim_gr":[0,1],
@@ -195,7 +196,7 @@ def individual_helical_plot(df,f_max,dict_fam,path,save_file,fam,image_path):
     fig.update_xaxes(title_text='r/a',title_font = {"size": 24})
     fig.update_yaxes(title_text='Frequency (kHz)',title_font = {"size": 24})
     fig.update_layout(yaxis_range=[0,300])
-    fig.update_layout(xaxis_range=[0.1,1.1])
+    fig.update_layout(xaxis_range=[0.1,1])
     
     fig.show()
     fig.write_image(f"{save_file}/{title}_Contiuum.png",width=800, height=600, scale=3)
@@ -219,7 +220,7 @@ def maximum_instability_energy(df5,df6,df7):
         E_ep_h = E_ep_n5
         fam = "n = 5,9,13,17"
     
-    elif max_gr == gr6:
+    elif maximum == gr6:
         gr = gr6
         beta = beta_n6
         E_ep_h = E_ep_n6
@@ -279,7 +280,7 @@ def maximum_instability_beta(df5,df6,df7):
         E_ep_h = E_ep_n5
         fam = "n = 5,9,13,17"
     
-    elif max_gr == gr6:
+    elif maximum == gr6:
         gr = gr6
         beta = beta_n6
         E_ep_h = E_ep_n6
