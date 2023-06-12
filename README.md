@@ -1,4 +1,4 @@
-<h3 align="center"> Theoretical Study of Alfvénic Stability Optimization for TJ-II Stellerator </h3> 
+<h3 align="center"> Theoretical Study of Alfvénic Stability Optimization for TJ-II Stellarator </h3> 
 
 Supervisor: [Jacobo Varela](https://www.researchgate.net/profile/Jacobo-Varela)
 
@@ -15,7 +15,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
 
 <p align="center">
   
-![Couplings](/Rotational%20Transform%20Couplings/Examples/delta_iota_0.15_Resonant.png "Example for a 4 period stellarator with high shear.")
+![Couplings](/Resonant_modes/Examples/delta_iota_0.15_Resonant.png "Example for a 4 period stellarator with high shear.")
   
 </p>
 
@@ -23,7 +23,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
 
 <p align="center">
   
-![Couplings](/FAR3d%20Results%20Visualization/Examples/20.0_0.25.png)
+![Couplings](/FAR3d%20Acquisition%20Results/Examples/20.0_0.25.png)
   
 </p>
 
