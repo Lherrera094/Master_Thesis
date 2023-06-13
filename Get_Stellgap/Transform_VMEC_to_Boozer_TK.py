@@ -9,10 +9,10 @@ import numpy as np
 
 
 # %%
-def vmec_to_Boozer(vmec_file,save_file,device,profile):
+def vmec_to_Boozer(vmec_file,save_file,device,profile,surfaces):
     b = bx.Booz_xform()
     b.read_wout(f"{vmec_file}")
-    b.compute_surfs
+    b.compute_surfs = surfaces
     b.run()
     b.write_boozmn(f"{save_file}/boozmn_{device}_{profile}.nc")
 
