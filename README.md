@@ -35,11 +35,19 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
   
 </p>
 
-* **In Continuum Analysis**: Reads the excel file `Output_{Prof}_{n_fam}` and plot in the Alfvén Continuum at the radial position, the excited eigenmodes and their growth rate represented as a colormap. The software also creates and excel `{Profile}_Maximum_Values` separeted by fast particles profile, with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
+* **Alfv\'en Continuum Analysis**: Reads the excel file `Output_{Prof}_{n_fam}` and plot in the Alfvén Continuum at the radial position, the excited eigenmodes and their growth rate represented as a colormap. The software also creates and excel `{Profile}_Maximum_Values` separeted by fast particles profile, with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
 
 <p align="center">
   
 ![Couplings](/Data_Analysis/1.%20Experimental%20Profile/n=6,10,14_Contiuum.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
+  
+</p>
+
+* **VMEC_reader**: Script reads wout_* VMEC file, prints the variables names and plots a 3D magnetic surface and the poloidal cross-sextion at the specified angle. 
+
+<p align="center">
+  
+![Couplings](/VMEC_reader/TJII.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
   
 </p>
 
