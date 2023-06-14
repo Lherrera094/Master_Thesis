@@ -35,11 +35,11 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
   
 </p>
 
-* **Alfv\'en Continuum Analysis**: Reads the excel file `Output_{Prof}_{n_fam}` and plot in the Alfvén Continuum the excited eigenmodes and their growth rate represented as a colormap. The software also creates and excel `{Profile}_Maximum_Values` with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
+* **Alfven Continuum Analysis**: Reads the excel file `Output_{Prof}_{n_fam}` and plot in the Alfvén Continuum the excited eigenmodes and their growth rate represented as a colormap. The software also creates and excel `{Profile}_Maximum_Values` with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
 
 <p align="center">
   
-![Couplings](/Data_Analysis/1.%20Experimental%20Profile/n=5,9,13,17_Contiuum.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
+![Couplings](Data_Analysis/1.%20Experimental%20Profile/Examples/n=5,9,13,17_Contiuum.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
   
 </p>
 
