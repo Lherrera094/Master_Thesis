@@ -47,7 +47,7 @@ Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.e
 
 <p align="center">
   
-![Couplings](/VMEC_reader/TJII.png "Example for Alfvén Continuumw with AE activity found in FAR3d simulations.")
+![Couplings](/VMEC_reader/TJ-II_new_Magnetic_Surface.gif")
   
 </p>
 
