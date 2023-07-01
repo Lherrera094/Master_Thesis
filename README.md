@@ -55,7 +55,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
 
 <p align="center">
   
-![Couplings](/VMEC_reader/TJ-II_new_Magnetic_Surface.gif "")
+
   
 </p>
 
