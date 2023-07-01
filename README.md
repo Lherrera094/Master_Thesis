@@ -9,9 +9,9 @@ for the n = 7,11, 15, n = 5,9,13, 17, n = 6,10,14 helical families including EP 
 
 The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.es/bitstream/handle/10016/34630/Noninear_NF_2021.pdf?sequence=1) results are:
 
-* **Automatization**: Python scripts for faster preparation of launching folder for FAR3d. Scripts developed to launch simulations in cluster URANUS at Universidad Carlos III de Madrid.
+* **Automatization**: Python scripts for faster preparation of launching folder for FAR3d simulations. Scripts developed to launch simulations in cluster URANUS at Universidad Carlos III de Madrid.
 
-* **Rotational Transform Couplings**: Main code obtains the resonant modes for a rotational transform profile. It returns a plot of the resonant modes appearence and the $\iota$ profile, also, an excel with all relevant values. As inputs, it can receives the extremum values, the VMEC wout file or the profile.dat file from FAR3d, the periods for the device (In case of stellarators) and the equilibrium modes. 
+* **Rotational Transform Couplings**: Code obtains the resonant modes for a rotational transform profile. It returns a plot of the resonant modes in the $\iota$ profile, and also an Excel with all relevant values. As inputs, it can receive the extremum values, the VMEC wout file or the profile.dat from FAR3d, the periods for the device (In the case of stellarators) and the equilibrium modes. 
 
 <p align="center">
   
@@ -19,7 +19,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **FAR3d Acquisiton Results**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individually and creates a map image with the whole set of plots arranged as (EP_beta,EP_energy). Returns an excel file with important data from the simulations usefull for further analysis called `Output_{Prof}_{n_fam}`.
+* **FAR3d Acquisiton Results**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individually and creates a map image with the whole set of plots arranged as (EP_beta,EP_energy). Returns a data frame (`Output_{Prof}_{n_fam}`) file with selected relevant data from the simulations for further analysis.
 
 <p align="center">
   
@@ -27,7 +27,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **Heatmaps**: From the Output of FAR3d simulations, creates a heatmap for Frequency and Growth Rate for the Alfvén Eigenmodes as                                      (EP_beta,EP_Energy).
+* **Heatmaps**: From the Output of FAR3d simulations, create a heatmap for Frequency and Growth Rate for the Alfvén Eigenmodes as                                      (EP_beta,EP_Energy).
  
 <p align="center">
   
@@ -35,7 +35,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **Alfven Continuum Analysis**: Reads the excel file `Output_{Prof}_{n_fam}` and plot in the Alfvén Continuum the excited eigenmodes and their growth rate represented as a colormap. The software also creates and excel `{Profile}_Maximum_Values` with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
+* **Alfven Continuum Analysis**: Reads the dataframe `Output_{Prof}_{n_fam}` and plots in the Alfvén Continuum the excited eigenmodes and their growth rate represented as a color map. The software also creates a new dataframe `{Profile}_Maximum_Values` with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
 
 <p align="center">
   
@@ -44,6 +44,14 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
 </p>
 
 * **VMEC_reader**: Script reads wout_* VMEC file, prints the variables names and plots a 3D magnetic surface and the poloidal cross-sextion at the specified angle. 
+
+<p align="center">
+  
+![Couplings](/VMEC_reader/TJ-II_new_Magnetic_Surface.gif "")
+  
+</p>
+
+* **Get_Stellgap**: script that receives as input the VMEC wout file and transforms to Boozer coordinates to obtain the Alfvén Continuum. (In progress).
 
 <p align="center">
   
