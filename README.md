@@ -7,7 +7,7 @@ for the n = 7,11, 15, n = 5,9,13, 17, n = 6,10,14 helical families including EP 
 0.4.
 
 
-Codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.es/bitstream/handle/10016/34630/Noninear_NF_2021.pdf?sequence=1) results are:
+The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc3m.es/bitstream/handle/10016/34630/Noninear_NF_2021.pdf?sequence=1) results are:
 
 * **Automatization**: Python scripts for faster preparation of launching folder for FAR3d. Scripts developed to launch simulations in cluster URANUS at Universidad Carlos III de Madrid.
 
