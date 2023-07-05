@@ -11,7 +11,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
 
 * **Automatization**: Python scripts for faster preparation of launching folder for FAR3d simulations. Scripts developed to launch simulations in cluster URANUS at Universidad Carlos III de Madrid.
 
-* **Rotational Transform Couplings**: Code obtains the resonant modes for a rotational transform profile. It returns a plot of the resonant modes in the $\iota$ profile, and also an Excel with all relevant values. As inputs, it can receive the extremum values, the VMEC wout file or the profile.dat from FAR3d, the periods for the device (In the case of stellarators) and the equilibrium modes. 
+* **Rotational Transform Couplings**: Code obtains the resonant modes for a rotational transform profile. It returns a plot of the resonant modes in the $\iota$ profile, and also an Excel with all relevant values. As inputs, it can receive the extremum values, the VMEC wout file or the profile.dat from FAR3d, the periods of the device (in the case of stellarators) and the equilibrium modes. 
 
 <p align="center">
   
