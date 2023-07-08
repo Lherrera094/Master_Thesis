@@ -43,7 +43,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **VMEC_reader**: Script reads wout_* VMEC file, prints the variables names and plots a 3D magnetic surface and the poloidal cross-sextion at the specified angle. 
+* **VMEC_reader**: Script reads wout_* VMEC file, prints the variables names, plots the 3D magnetic surface and the poloidal cross-section at the specified angle of the device. 
 
 <p align="center">
   
