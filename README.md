@@ -2,7 +2,7 @@
 
 Supervisor: [Jacobo Varela](https://www.researchgate.net/profile/Jacobo-Varela)
 
-**Description**: The objective is to study the Alfvén Eigenmodes activity on TJ-II Stellarator with respect to operation of NBI heating system and magnetic topology variation for optimization. The analysis is performed using the linear version of the gyro-fluid code FAR3d. The Alfvén Continuum is computed with the STELLGAP code. The AE stability analysis is performed
+**Description**: The objective is to study the Alfvén Eigenmodes activity on TJ-II Stellarator with respect to the operation of the NBI heating system and magnetic topology variation for optimization. The analysis is performed using the linear version of the gyro-fluid code FAR3d. The Alfvén Continuum is computed with the STELLGAP code. The AE stability analysis is performed
 for the n = 7,11, 15, n = 5,9,13, 17, n = 6,10,14 helical families including EP populations with energies in the range of 10 - 50 keV and EP beta from 0.1 to
 0.4.
 
@@ -19,7 +19,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **FAR3d Acquisiton Results**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individually and creates a map image with the whole set of plots arranged as (EP_beta,EP_energy). Returns a data frame (`Output_{Prof}_{n_fam}`) file with selected relevant data from the simulations for further analysis.
+* **FAR3d Acquisition Results**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individually and creates a map image with the whole set of plots arranged as (EP_beta,EP_energy). Returns a data frame (`Output_{Prof}_{n_fam}`) file with selected relevant data from the simulations for further analysis.
 
 <p align="center">
   
@@ -35,7 +35,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **Alfven Continuum Analysis**: Reads the dataframe `Output_{Prof}_{n_fam}` and plots in the Alfvén Continuum the excited eigenmodes and their growth rate represented as a color map. The software also creates a new dataframe `{Profile}_Maximum_Values` with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
+* **Alfven Continuum Analysis**: Reads the data frame `Output_{Prof}_{n_fam}` and plots in the Alfvén Continuum the excited eigenmodes and their growth rate represented as a color map. The software also creates a new data frame `{Profile}_Maximum_Values` with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
 
 <p align="center">
   
