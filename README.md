@@ -1,6 +1,7 @@
 <h3 align="center"> Theoretical Study of Alfvénic Stability Optimization for TJ-II Stellarator </h3> 
 
 From February 1st to June 27.
+
 Supervisor: [Jacobo Varela](https://www.researchgate.net/profile/Jacobo-Varela)
 
 **Description**: The objective is to study the Alfvén Eigenmodes activity on TJ-II Stellarator with respect to the operation of the NBI heating system and magnetic topology variation for optimization. The analysis is performed using the linear version of the gyro-fluid code FAR3d. The Alfvén Continuum is computed with the STELLGAP code. The AE stability analysis is performed
