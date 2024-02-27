@@ -1,10 +1,10 @@
 <h3 align="center"> Theoretical Study of Alfvénic Stability Optimization for TJ-II Stellarator </h3> 
 
-From February 1st to June 27.
+From February 1st to June 27th, 2023.
 
 Supervisor: [Jacobo Varela](https://www.researchgate.net/profile/Jacobo-Varela)
 
-**Description**: The objective is to study the Alfvén Eigenmodes activity on TJ-II Stellarator with respect to the operation of the NBI heating system and magnetic topology variation for optimization. The analysis is performed using the linear version of the gyro-fluid code FAR3d. The Alfvén Continuum is computed with the STELLGAP code. The AE stability analysis is performed
+**Description**: The objective is to study the Alfvén Eigenmodes activity on the TJ-II Stellarator concerning the operation of the NBI heating system and magnetic topology variation for optimization. The analysis is performed using the linear version of the gyro-fluid code FAR3d. The Alfvén Continuum is computed with the STELLGAP code. The AE stability analysis is performed
 for the n = 7,11, 15, n = 5,9,13, 17, n = 6,10,14 helical families including EP populations with energies in the range of 10 - 50 keV and EP beta from 0.1 to
 0.4.
 
@@ -21,7 +21,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **FAR3d Acquisition Results**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individually and creates a map image with the whole set of plots arranged as (EP_beta,EP_energy). Returns a data frame (`Output_{Prof}_{n_fam}`) file with selected relevant data from the simulations for further analysis.
+* **FAR3d Acquisition Results**: Reads the outputs of the FAR3d simulations, plots all eigenfunctions individually, and creates a map image with the whole set of plots arranged as (EP_beta, EP_energy). Returns a data frame (`Output_{Prof}_{n_fam}`) file with selected relevant data from the simulations for further analysis.
 
 <p align="center">
   
@@ -29,7 +29,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **Heatmaps**: From the Output of FAR3d simulations, create a heatmap for the Growth rate (left) and Frequency  (right) of Alfvén Eigenmodes as                                      (EP_beta,EP_Energy).
+* **Heatmaps**: From the Output of FAR3d simulations, create a heatmap for the Growth rate (left) and Frequency  (right) of Alfvén Eigenmodes as                                      (EP_beta, EP_Energy).
  
 <p align="center">
   
@@ -37,7 +37,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **Alfven Continuum Analysis**: Reads the data frame `Output_{Prof}_{n_fam}` and plots in the Alfvén Continuum the excited eigenmodes and their growth rate represented as a color map. The software also creates a new data frame `{Profile}_Maximum_Values` with the excited eigenmodes whose growth rate is largest for toroidal couplings. 
+* **Alfven Continuum Analysis**: Reads the data frame `Output_{Prof}_{n_fam}` and plots in the Alfvén Continuum the excited eigenmodes and their growth rate represented as a color map. The software also creates a new data frame `{Profile}_Maximum_Values` with the excited eigenmodes whose growth rate is the largest for toroidal couplings. 
 
 <p align="center">
   
@@ -53,7 +53,7 @@ The codes developed to optimize the analysis of the [FAR3d](https://e-archivo.uc
   
 </p>
 
-* **Get_Stellgap**: script that receives as input the VMEC wout file and transforms to Boozer coordinates to obtain the Alfvén Continuum. (In progress).
+* **Get_Stellgap**: script that receives the VMEC wout file as input and transforms to Boozer coordinates to obtain the Alfvén Continuum. (In progress).
 
 <p align="center">
   
